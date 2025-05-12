@@ -1,0 +1,10 @@
+<% if results.any? %>
+  <div class="absolute w-full overflow-y-auto max-h-80 bg-white rounded-lg shadow-lg" data-search-target='suggestions' data-action='mousedown->search#childClick'>
+    <% results.each do |post| %>
+      <div class="p-2 border-b border-gray-300 hover:bg-gray-100">
+        <%= link_to post.title, post, class: 'text-blue-500' %>
+        <%= content_tag :p, post.body, class: 'text-gray-500' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
