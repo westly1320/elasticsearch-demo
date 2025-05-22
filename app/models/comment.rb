@@ -1,18 +1,13 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: comments
 #
 #  id         :integer          not null, primary key
-#  title      :string
-#  body       :string
+#  body       :text
+#  post_id    :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
-one:
-  title: MyString
-  body: MyString
-
-two:
-  title: MyString
-  body: MyString
+class Comment < ApplicationRecord
+  belongs_to :post
+end

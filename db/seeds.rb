@@ -16,3 +16,12 @@
                 body: Faker::Lorem.paragraph(sentence_count: 2)
               })
 end
+
+Post.find_each do |post|
+  rand(1..5).times do
+    Comment.create!(
+      post: post,
+      body: Faker::Lorem.paragraph(sentence_count: 3)
+    )
+  end
+end

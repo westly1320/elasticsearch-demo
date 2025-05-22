@@ -1,7 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @post %>
+<br/>
+<h1 class="font-bold">Comments:</h1>
+<% if @post.comments.any? %>
+  <ul class="list-disc ml-4">
+    <% @post.comments.each do |comment| %>
+      <li><%= comment.body %></li>
+    <% end %>
+  </ul>
+<% end %>
 
+<br/>
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |
   <%= link_to "Back to posts", posts_path %>
