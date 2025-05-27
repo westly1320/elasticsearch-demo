@@ -44,8 +44,4 @@ export default class extends Controller {
   showSuggestions() {
     this.suggestionsTarget.classList.remove('hidden');
   }
-
-  childClick() {
-
-  }
 }

@@ -2,11 +2,12 @@
 #
 # Table name: posts
 #
-#  id         :integer          not null, primary key
-#  title      :string
-#  body       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  title       :string
+#  body        :string
+#  views_count :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 class Post < ApplicationRecord
   include Elasticsearch::Model
@@ -17,28 +18,26 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   settings analysis: {
+    "filter": {
+      "custom_synonym_filter": {
+        "type": "synonym",
+        "synonyms": [
+          "may tinh => laptop",
+        ]
+      }
+    },
     analyzer: {
-      asciifolding_lowercase: {
+      asciifolding_custom: {
         type:      'custom',
         tokenizer: 'standard',
-        filter:    %w[lowercase asciifolding]
-      },
-      keyword:           {
-        type:      'custom',
-        tokenizer: 'keyword',
-        filter:    []
-      },
-      lowercase:         {
-        type:      'custom',
-        tokenizer: 'standard',
-        filter:    ['lowercase']
+        filter:    %w[lowercase asciifolding custom_synonym_filter]
       }
     }
   }
 
   mapping do
     indexes :id, type: :integer
-    indexes :title, type: :text, analyzer: 'asciifolding_lowercase'
+    indexes :title, type: :text, analyzer: 'asciifolding_custom'
     indexes :body, type: :text, analyzer: 'snowball'
     indexes :comments do
       indexes :id, type: :integer
@@ -72,4 +71,18 @@ class Post < ApplicationRecord
       }
     )
   end
+
+  # def self.search(query)
+  #   __elasticsearch__.search(
+  #     {
+  #       query: {
+  #         multi_match: {
+  #           query: query,
+  #           fields: %w[title body],
+  #           "fuzziness": 1
+  #         }
+  #       }
+  #     }
+  #   )
+  # end
 end

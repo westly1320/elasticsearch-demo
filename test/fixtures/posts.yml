@@ -2,11 +2,12 @@
 #
 # Table name: posts
 #
-#  id         :integer          not null, primary key
-#  title      :string
-#  body       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  title       :string
+#  body        :string
+#  views_count :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 one:

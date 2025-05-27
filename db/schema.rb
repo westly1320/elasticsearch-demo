@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_19_155745) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "body"
+    t.integer "views_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

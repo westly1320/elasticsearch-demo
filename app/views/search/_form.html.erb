@@ -11,7 +11,7 @@
       <%= f.submit 'Search', class: "cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
     </div>
 
-    <div id="suggestions" class="absolute w-full mt-2 bg-white rounded-lg shadow-lg" data-search-target='suggestions' data-action='mousedown->search#childClick'>
+    <div id="suggestions" class="absolute w-full mt-2 bg-white rounded-lg shadow-lg" data-search-target='suggestions' >
       <%= render 'search/suggestions', results: results %>
     </div>
   </div>
